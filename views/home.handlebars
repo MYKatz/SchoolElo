@@ -23,12 +23,13 @@
             <img class="img-fluid" src="assets/favicon.png">
             <h1>SchoolElo</h1>
             <h4>Crowdsourced College Rankings</h4>
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-  Launch demo modal
+            <button type="button" class="btn btn-red" data-toggle="modal" data-target="#exampleModalCenter">
+  Rate Schools
 </button>
         </div>
 
         <div id="table" class="my-5">
+            <div class="text-right">Rankings refresh every 5 minutes</div>
             <table class="table">
                 <thead>
                     <tr>
@@ -39,81 +40,33 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                    <th scope="row">1</th>
-                    <td>Stanford</td>
-                    <td>1000</td>
-                    <td>
-                        <svg viewBox="0 0 100 50" class="chart">
-                            <polyline
-                                fill="none"
-                                stroke="#242124"
-                                stroke-width="3"
-                                stroke-linejoin="round"
-                                points="
-                                10,30
-                                20,20
-                                30,10
-                                40,20
-                                50,40
-                                60,00
-                                70,20
-                                80,25
-                                90,10
-                                100,05"/>
-                        </svg>
-                    </td>
-                    </tr>
-                    <tr>
-                    <th scope="row">2</th>
-                    <td>Harvard</td>
-                    <td>1000</td>
-                    <td>
-                        <svg viewBox="0 0 100 50" class="chart">
-                            <polyline
-                                fill="none"
-                                stroke="#242124"
-                                stroke-width="3"
-                                stroke-linejoin="round"
-                                points="
-                                10,30
-                                20,20
-                                30,10
-                                40,20
-                                50,40
-                                60,00
-                                70,20
-                                80,25
-                                90,10
-                                100,05"/>
-                        </svg>
-                    </td>
-                    </tr>
-                    <tr>
-                    <th scope="row">3</th>
-                    <td>MIT</td>
-                    <td>1000</td>
-                    <td>
-                        <svg viewBox="0 0 100 50" class="chart">
-                            <polyline
-                                fill="none"
-                                stroke="#242124"
-                                stroke-width="3"
-                                stroke-linejoin="round"
-                                points="
-                                10,30
-                                20,20
-                                30,10
-                                40,20
-                                50,40
-                                60,00
-                                70,20
-                                80,25
-                                90,10
-                                100,05"/>
-                        </svg>
-                    </td>
-                    </tr>
+                    {{#each school}}
+                        <tr>
+                        <th scope="row">{{this.rank}}</th>
+                        <td>{{this.name}}</td>
+                        <td>{{this.elo}}</td>
+                        <td>
+                            <svg viewBox="0 0 100 50" class="chart">
+                                <polyline
+                                    fill="none"
+                                    stroke="#242124"
+                                    stroke-width="3"
+                                    stroke-linejoin="round"
+                                    points="
+                                    10,30
+                                    20,20
+                                    30,10
+                                    40,20
+                                    50,40
+                                    60,00
+                                    70,20
+                                    80,25
+                                    90,10
+                                    100,05"/>
+                            </svg>
+                        </td>
+                        </tr>
+                    {{/each}}
                 </tbody>
             </table>
 

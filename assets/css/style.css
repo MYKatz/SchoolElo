@@ -25,3 +25,19 @@ body {
 .chart {
     height: 25px;
 }
+
+.btn-red {
+    color: #fff;
+    background-color: #FF2400;
+    border-color: #FF2400;
+}
+  
+.btn-red:hover {
+    color: #fff;
+    background-color: #e01f00;
+    border-color: #e01f00;
+}
+  
+.btn-red:focus, .btn-red.focus {
+    box-shadow: 0 0 0 0.2rem rgba(255, 36, 0, 0.5);
+}
