@@ -3,3 +3,25 @@ body {
     color: #242124;
     font-family: 'Overpass Mono', monospace;
 }
+
+.faq-item {
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.table {
+    border-color: #242124;
+}
+
+.btn {
+    border-radius: 0px;
+    font-family: monospace
+}
+
+.modal-content {
+    border-radius: 0px;
+}
+
+.chart {
+    height: 25px;
+}

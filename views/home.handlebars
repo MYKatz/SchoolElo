@@ -9,6 +9,7 @@
     <link href="https://fonts.googleapis.com/css?family=Overpass+Mono" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/bootstrap.css">
     <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">
 
     <!-- the below three lines are a fix to get HTML5 semantic elements working in old versions of Internet Explorer-->
     <!--[if lt IE 9]>
@@ -21,8 +22,105 @@
         <div class="text-center my-3">
             <img class="img-fluid" src="assets/favicon.png">
             <h1>SchoolElo</h1>
-            <h4>Crowdsourced University Rankings</h4>
+            <h4>Crowdsourced College Rankings</h4>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+  Launch demo modal
+</button>
         </div>
+
+        <div id="table" class="my-5">
+            <table class="table">
+                <thead>
+                    <tr>
+                    <th scope="col">Rank</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Elo</th>
+                    <th scope="col">Chart</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                    <th scope="row">1</th>
+                    <td>Stanford</td>
+                    <td>1000</td>
+                    <td>
+                        <svg viewBox="0 0 100 50" class="chart">
+                            <polyline
+                                fill="none"
+                                stroke="#242124"
+                                stroke-width="3"
+                                stroke-linejoin="round"
+                                points="
+                                10,30
+                                20,20
+                                30,10
+                                40,20
+                                50,40
+                                60,00
+                                70,20
+                                80,25
+                                90,10
+                                100,05"/>
+                        </svg>
+                    </td>
+                    </tr>
+                    <tr>
+                    <th scope="row">2</th>
+                    <td>Harvard</td>
+                    <td>1000</td>
+                    <td>
+                        <svg viewBox="0 0 100 50" class="chart">
+                            <polyline
+                                fill="none"
+                                stroke="#242124"
+                                stroke-width="3"
+                                stroke-linejoin="round"
+                                points="
+                                10,30
+                                20,20
+                                30,10
+                                40,20
+                                50,40
+                                60,00
+                                70,20
+                                80,25
+                                90,10
+                                100,05"/>
+                        </svg>
+                    </td>
+                    </tr>
+                    <tr>
+                    <th scope="row">3</th>
+                    <td>MIT</td>
+                    <td>1000</td>
+                    <td>
+                        <svg viewBox="0 0 100 50" class="chart">
+                            <polyline
+                                fill="none"
+                                stroke="#242124"
+                                stroke-width="3"
+                                stroke-linejoin="round"
+                                points="
+                                10,30
+                                20,20
+                                30,10
+                                40,20
+                                50,40
+                                60,00
+                                70,20
+                                80,25
+                                90,10
+                                100,05"/>
+                        </svg>
+                    </td>
+                    </tr>
+                </tbody>
+            </table>
+
+
+        </div>
+
+        <hr/>
 
         <div class="my-5" id="faq">
             <div class="faq-item">
@@ -34,7 +132,7 @@
             </div>
 
             <div class="faq-item">
-                <h3>How does it work?</h3>
+                <h3>How did you decide which schools to include?</h3>
                 <p>Bacon ipsum dolor amet fatback rump pastrami cupim short loin brisket picanha sirloin doner ham tri-tip ribeye. Sausage landjaeger brisket corned beef sirloin cow. Corned beef t-bone pork belly tongue cupim flank meatloaf. Kielbasa tongue fatback prosciutto jowl frankfurter cupim drumstick tri-tip spare ribs pork chop sausage ham ribeye pork belly.
 
     Pig turkey jowl prosciutto. Doner tenderloin burgdoggen, beef drumstick boudin prosciutto jerky. Doner fatback drumstick andouille meatball, turkey meatloaf tri-tip. Biltong andouille bacon capicola pork chop pancetta, alcatra leberkas pork loin tongue tail salami. Pancetta burgdoggen short ribs landjaeger tenderloin picanha swine beef hamburger venison tongue. Cupim prosciutto meatloaf capicola alcatra, picanha swine turducken turkey shoulder rump.
@@ -42,7 +140,7 @@
             </div>
 
             <div class="faq-item">
-                <h3>How does it work?</h3>
+                <h3>Is this a good indicator of a school's quality?</h3>
                 <p>Bacon ipsum dolor amet fatback rump pastrami cupim short loin brisket picanha sirloin doner ham tri-tip ribeye. Sausage landjaeger brisket corned beef sirloin cow. Corned beef t-bone pork belly tongue cupim flank meatloaf. Kielbasa tongue fatback prosciutto jowl frankfurter cupim drumstick tri-tip spare ribs pork chop sausage ham ribeye pork belly.
 
     Pig turkey jowl prosciutto. Doner tenderloin burgdoggen, beef drumstick boudin prosciutto jerky. Doner fatback drumstick andouille meatball, turkey meatloaf tri-tip. Biltong andouille bacon capicola pork chop pancetta, alcatra leberkas pork loin tongue tail salami. Pancetta burgdoggen short ribs landjaeger tenderloin picanha swine beef hamburger venison tongue. Cupim prosciutto meatloaf capicola alcatra, picanha swine turducken turkey shoulder rump.
@@ -50,9 +148,39 @@
             </div>
         </div>
 
+      <footer class="text-center">
+
+          © Katz 2019
+
+      </footer>
+
       </div>
+
+        <!-- modal -->
+        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Harvard University</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+                </div>
+            </div>
+        </div>
+
   </body>
 
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
   <script src="assets/js/bootstrap.js"></script>
 
 </html>
