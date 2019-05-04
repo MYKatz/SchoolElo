@@ -5,6 +5,8 @@ const exphbs  = require('express-handlebars');
 app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
 
+app.use('/assets', express.static("assets"))
+
 // === routes ===
 
 app.get('/', function(req, res){
