@@ -180,4 +180,4 @@ app.get('/schools', function(req, res){
     });
 });
 
-app.listen(process.env.port || 80, () => console.log('Server started'));
+app.listen(process.env.PORT || 80, () => console.log('Server started'));
