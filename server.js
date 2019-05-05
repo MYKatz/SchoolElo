@@ -41,20 +41,40 @@ function updateList(){
                 r = "=" + rank.toString()
             }
             obj = {name: docs[i].name, elo: docs[i].elo, rank: r}
-            if(docs[i].history.length > 5){
-                obj.history = "" //process this somehow
+            max = Math.max(...docs[i].history) + 5
+            min = Math.min(...docs[i].history) - 5
+            hist = ""
+            for(var j = 0; j < docs[i].history.length; j++){
+                hist += (j*25).toString() + "," + (50 - (50 * (docs[i].history[j] - min) / (max - min))) + " "
             }
-            else{
-                obj.history = '"0,25 100,25"'
-            }
+            obj.history = '"' + hist + '"'
             tmp.push(obj)
         }
     });
     schools = tmp;
 }
 
-updateList();
+function resetHistory(){
+    School.updateMany({}, {history: [1000, 1000, 1000, 1000, 1000]}, {multi: true}, function(err, s){
+        console.log("updated")
+    });
+}
 
+function updateHistory(){
+    School.find({}).exec(function(err, docs){
+        for(var i = 0; i < docs.length; i++){
+            School.findOne({name: docs[i].name}, function(err, doc){
+                newArr = doc.history.slice(1);
+                newArr.push(doc.elo);
+                doc.history = newArr;
+                doc.save();
+            })
+        }
+    });
+}
+
+//updateHistory();
+updateList();
 // === routes ===
 
 

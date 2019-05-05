@@ -2,7 +2,7 @@ Schoolelo: croudsources university rankings
 
 ##How does it work?
 
-SchoolElo uses the [elo rating system](https://en.wikipedia.org/wiki/Elo_rating_system) to produce its college ranking list. 
+SchoolElo uses the [elo rating system](https://en.wikipedia.org/wiki/Elo_rating_system) to produce these rankings. When you click on the 'new match' button above, 
 
 ##How did you decide which schools to include?
 
