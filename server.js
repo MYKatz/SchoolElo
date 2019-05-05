@@ -3,8 +3,6 @@ const app = express();
 const exphbs  = require('express-handlebars');
 const bodyParser = require('body-parser')
 
-var jsonParser = bodyParser.json();
-
 const crypto = require("crypto");
 
 require('dotenv').config()
@@ -14,10 +12,15 @@ app.set('view engine', 'handlebars');
 
 app.use('/assets', express.static("assets"));
 
-var schools = []
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
+
+var schools = [];
+var counter = 0;
 var matches = {
 
-}
+};
 
 //mongoose stuff
 var mongoose = require("mongoose");
@@ -27,6 +30,7 @@ mongoose.connect(process.env.MONGO_URI);
 // schemas
 
 var School = require('./models/school.js');
+var Match = require('./models/match.js');
 
 
 // helpers
@@ -39,7 +43,7 @@ function updateList(){
         var r = "";
         for(var i = 0; i < docs.length; i++){
             if(docs[i].elo != lastelo){
-                rank++;
+                rank = i + 1;
                 lastelo = docs[i].elo;
                 r = rank.toString()
             }
@@ -59,12 +63,12 @@ function updateList(){
             obj.history = '"' + hist + '"'
             tmp.push(obj)
         }
+        schools = tmp;
     });
-    schools = tmp;
 }
 
 function resetHistory(){
-    School.updateMany({}, {history: [1000, 1000, 1000, 1000, 1000]}, {multi: true}, function(err, s){
+    School.updateMany({}, {history: [1000, 1000, 1000, 1000, 1000], elo: 1000}, {multi: true}, function(err, s){
         console.log("updated")
     });
 }
@@ -88,7 +92,10 @@ function removeMatch(id){
     }
 }
 
+setInterval(updateList, 30000); //update list every half-minute
+
 //updateHistory();
+//resetHistory();
 updateList();
 // === routes ===
 
@@ -114,15 +121,14 @@ app.get('/api/newMatch', function(req, res){
             matches[hash] = toSend;
             toSend.hash = hash;
             res.send(toSend);
-            console.log(matches);
         });
     });
-    setTimeout(removeMatch(hash), 300000); //5 minute delay, then delete match
+    //setTimeout(removeMatch(hash), 300000); //5 minute delay, then delete match
 });
 
-app.post('/api/matchResult', jsonParser, function(req, res){
+app.post('/api/matchResult', function(req, res){
     //receives json in form {result: Number, hash: str}
-    var k = 30 //K, elo rating constant. This will be 30 for now to slightly increase volatility.
+    var k = 50 //K, elo rating constant. This will be 50 for now to slightly increase volatility.
     if(matches[req.body.hash] && req.body.result <= 1 && req.body.result >= 0){
         var match = matches[req.body.hash] //just in case the match gets removed from memory while we're processing it
         School.findOne({name: match.school1}, function(err, s1){
@@ -133,10 +139,22 @@ app.post('/api/matchResult', jsonParser, function(req, res){
                 var Eb =  1 - Ea;
                 var Rap = Ra + k * (req.body.result - Ea);
                 var Rbp = Rb + k * ((1 - req.body.result) - Eb);
-                s1.elo = Rap;
-                s2.elo = Rbp;
+                s1.elo = parseInt(Rap);
+                s2.elo = parseInt(Rbp);
                 s1.save()
                 s2.save()
+                var newMatch = new Match();
+                newMatch.school1 = s1.name;
+                newMatch.school2 = s2.name;
+                newMatch.result = req.body.result;
+                newMatch.save();
+                res.send({success: true});
+                counter++;
+                console.log(counter);
+                if(counter > 99){
+                    counter = 0;
+                    updateHistory();
+                }
             })
         })
     }

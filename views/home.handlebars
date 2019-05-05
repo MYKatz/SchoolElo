@@ -19,17 +19,17 @@
 
   <body>
       <div class="container">
-        <div class="text-center my-3">
+        <div class="text-center my-5">
             <img class="img-fluid" src="assets/favicon.png">
             <h1>SchoolElo</h1>
             <h4>Crowdsourced College Rankings</h4>
-            <button type="button" class="btn btn-red" data-toggle="modal" data-target="#exampleModalCenter">
+            <button type="button" id="open" class="btn btn-red" data-toggle="modal" data-target="#exampleModalCenter">
   New Match
 </button>
         </div>
 
         <div id="table" class="my-5">
-            <div class="text-right">Rankings refresh every 5 minutes</div>
+            <div class="text-right">Rankings refresh every half-minute / Charts update every 100 matches</div>
             <table class="table">
                 <thead>
                     <tr>
@@ -37,6 +37,7 @@
                     <th scope="col">Name</th>
                     <th scope="col">Elo</th>
                     <th scope="col">Chart</th>
+                    <th scope="col">Share</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -56,6 +57,7 @@
                                 />
                             </svg>
                         </td>
+                        <td><span class="hov">Tw</span>|<span class="hov">Fb</span></td>
                         </tr>
                     {{/each}}
                 </tbody>
@@ -67,34 +69,35 @@
         <hr/>
 
         <div class="my-5" id="faq">
+            <h2>FAQ.</h2>
             <div class="faq-item">
                 <h3>How does it work?</h3>
-                <p>Bacon ipsum dolor amet fatback rump pastrami cupim short loin brisket picanha sirloin doner ham tri-tip ribeye. Sausage landjaeger brisket corned beef sirloin cow. Corned beef t-bone pork belly tongue cupim flank meatloaf. Kielbasa tongue fatback prosciutto jowl frankfurter cupim drumstick tri-tip spare ribs pork chop sausage ham ribeye pork belly.
-
-    Pig turkey jowl prosciutto. Doner tenderloin burgdoggen, beef drumstick boudin prosciutto jerky. Doner fatback drumstick andouille meatball, turkey meatloaf tri-tip. Biltong andouille bacon capicola pork chop pancetta, alcatra leberkas pork loin tongue tail salami. Pancetta burgdoggen short ribs landjaeger tenderloin picanha swine beef hamburger venison tongue. Cupim prosciutto meatloaf capicola alcatra, picanha swine turducken turkey shoulder rump.
+                <p>SchoolElo uses the <a href="https://en.wikipedia.org/wiki/Elo_rating_system" class="hov">Elo rating system</a> to produce these rankings. When you click on the 'new match' button above, two colleges are chosen at random and presented head-to-head. After you select the winner (or declare a tie!), both school's elo ratings are recalculated. As hundreds of games are played, relatively clear rankings should hopefully emerge.
                 </p>
             </div>
 
             <div class="faq-item">
                 <h3>How did you decide which schools to include?</h3>
-                <p>Bacon ipsum dolor amet fatback rump pastrami cupim short loin brisket picanha sirloin doner ham tri-tip ribeye. Sausage landjaeger brisket corned beef sirloin cow. Corned beef t-bone pork belly tongue cupim flank meatloaf. Kielbasa tongue fatback prosciutto jowl frankfurter cupim drumstick tri-tip spare ribs pork chop sausage ham ribeye pork belly.
-
-    Pig turkey jowl prosciutto. Doner tenderloin burgdoggen, beef drumstick boudin prosciutto jerky. Doner fatback drumstick andouille meatball, turkey meatloaf tri-tip. Biltong andouille bacon capicola pork chop pancetta, alcatra leberkas pork loin tongue tail salami. Pancetta burgdoggen short ribs landjaeger tenderloin picanha swine beef hamburger venison tongue. Cupim prosciutto meatloaf capicola alcatra, picanha swine turducken turkey shoulder rump.
+                <p>Simple: I took the top forty universities and the top ten liberal arts colleges from the US News rankings. Although this probably means that some good schools weren't included, it was a decent arbitrary cutoff: all of the schools generally considered "top" are on our list (ivies, MIT, Stanford, top public universities, etc.) Apologies if your favorite school isn't on the list!
                 </p>
             </div>
 
             <div class="faq-item">
                 <h3>Is this a good indicator of a school's quality?</h3>
-                <p>Bacon ipsum dolor amet fatback rump pastrami cupim short loin brisket picanha sirloin doner ham tri-tip ribeye. Sausage landjaeger brisket corned beef sirloin cow. Corned beef t-bone pork belly tongue cupim flank meatloaf. Kielbasa tongue fatback prosciutto jowl frankfurter cupim drumstick tri-tip spare ribs pork chop sausage ham ribeye pork belly.
+                <p>Absolutely not. For two main reasons:
 
-    Pig turkey jowl prosciutto. Doner tenderloin burgdoggen, beef drumstick boudin prosciutto jerky. Doner fatback drumstick andouille meatball, turkey meatloaf tri-tip. Biltong andouille bacon capicola pork chop pancetta, alcatra leberkas pork loin tongue tail salami. Pancetta burgdoggen short ribs landjaeger tenderloin picanha swine beef hamburger venison tongue. Cupim prosciutto meatloaf capicola alcatra, picanha swine turducken turkey shoulder rump.
+1. The results are produced by direct comparisons of two schools, which is not at all representative of how a college should be judged.
+
+2. These rankings are generated entirely based off user's responses, so in the best case they can be thought of as a decent approximation of a school's 'prestige rating'. Realistically, the results are bound to be skewed by some bias in the sample of whoever actually visits the site, and will not be of use at all.
+
+Either way, it's all just for fun... so don't worry too much about the results; they don't really mean anything! (However, if you think the rankings are inaccurate, your best bet is to spam the new match button above and make your opinion count! 🤠)
                 </p>
             </div>
         </div>
 
       <footer class="text-center">
 
-          © Katz 2019
+          © 🐱‍👤 Katz 2019
 
       </footer>
 
@@ -112,10 +115,10 @@
                 </div>
                 <div class="modal-body">
                     <div class="row my-3">
-                        <div class="col-6 text-center"><h3 class="hov">Harvard</h3></div>
-                        <div class="col-6 text-center"><h3 class="hov">Stanford</h3></div>
+                        <div class="col-6 text-center"><h3 class="hov sub" id="school1" val="1" data-dismiss="modal"></h3></div>
+                        <div class="col-6 text-center"><h3 class="hov sub" id="school2" val="0" data-dismiss="modal"></h3></div>
                     </div>
-                    <div class="text-center hov">
+                    <div class="text-center hov sub" id="tie" val="0.5" data-dismiss="modal">
                         It's a tie!
                     </div>
                 </div>
@@ -128,9 +131,13 @@
 
   </body>
 
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <script src="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
   <script src="assets/js/bootstrap.js"></script>
+  <script src="assets/js/main.js"></script>
 
 </html>

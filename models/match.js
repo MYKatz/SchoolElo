@@ -6,4 +6,4 @@ var matchSchema = mongoose.Schema({
     result: Number //1 for school1 win, 0 for school1 loss/school2 win, 0.5 for tie
 });
 
-module.exports = mongoose.model("School", schoolSchema);
+module.exports = mongoose.model("Match", matchSchema);

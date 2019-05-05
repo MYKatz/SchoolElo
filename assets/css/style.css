@@ -45,4 +45,9 @@ body {
 .hov {
     text-decoration: underline;
     cursor: pointer;
+    color: #242124;
+}
+
+.hov:hover {
+    color: grey
 }
