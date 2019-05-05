@@ -41,3 +41,8 @@ body {
 .btn-red:focus, .btn-red.focus {
     box-shadow: 0 0 0 0.2rem rgba(255, 36, 0, 0.5);
 }
+
+.hov {
+    text-decoration: underline;
+    cursor: pointer;
+}

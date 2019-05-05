@@ -25,13 +25,27 @@ var School = require('./models/school.js');
 function updateList(){
     tmp = [];
     School.find({}).sort({elo: -1}).exec(function(err, docs){
+        var rank = 0;
+        var lastelo = -1;
+        var r = "";
         for(var i = 0; i < docs.length; i++){
-            obj = {name: docs[i].name, elo: docs[i].elo, rank: i+1}
+            if(docs[i].elo != lastelo){
+                rank++;
+                lastelo = docs[i].elo;
+                r = rank.toString()
+            }
+            else{
+                r = "=" + rank.toString()
+            }
+            if(i < (docs.length-1) && docs[i].elo == docs[i+1].elo){
+                r = "=" + rank.toString()
+            }
+            obj = {name: docs[i].name, elo: docs[i].elo, rank: r}
             if(docs[i].history.length > 5){
                 obj.history = "" //process this somehow
             }
             else{
-                obj.history = "0,25 100,25"
+                obj.history = '"0,25 100,25"'
             }
             tmp.push(obj)
         }
