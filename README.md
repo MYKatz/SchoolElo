@@ -1,4 +1,6 @@
-Schoolelo: croudsources university rankings
+Schoolelo: croudsourced university rankings
+
+Check out a live demo at [schoolelo.herokuapp.com](https://schoolelo.herokuapp.com/)
 
 ##How does it work?
 
